@@ -3,7 +3,7 @@
 > **Última actualización:** 2 de abril de 2026
 > **Total de tareas:** 172
 > **MVP (M1+M2+M3):** 114 tareas
-> **Completadas:** 13 (7.6%)
+> **Completadas:** 15 (8.7%)
 
 ---
 
@@ -37,14 +37,14 @@
 | 0.12 | Configurar ESLint, Prettier, TypeScript strict           | done   |
 | 0.13 | Configurar CI/CD básico                                  | done   |
 
-### Fase 1 — Arquitectura Multi-Tenant (0/2 active, 8 deferred to pre-prod)
+### Fase 1 — Arquitectura Multi-Tenant (2/2 active, 8 deferred to pre-prod)
 
 | ID   | Tarea                                           | Estado   |
 | ---- | ----------------------------------------------- | -------- |
 | 1.1  | Configurar wildcard domain en Vercel            | deferred |
 | 1.2  | Crear middleware de detección de tenant         | deferred |
-| 1.3  | Crear tabla organizations en Convex             | pending  |
-| 1.4  | Crear tabla organization_modules en Convex      | pending  |
+| 1.3  | Crear tabla organizations en Convex             | done     |
+| 1.4  | Crear tabla organization_modules en Convex      | done     |
 | 1.5  | Implementar query resolución de tenant por slug | deferred |
 | 1.6  | Crear TenantProvider en React                   | deferred |
 | 1.7  | Implementar filtro global de multitenancy       | deferred |
@@ -284,9 +284,9 @@
 
 | Milestone            | Fases             | Total   | Done   | Progreso |
 | -------------------- | ----------------- | ------- | ------ | -------- |
-| **M1 — Foundation**  | F0 + F1 + F2      | 33      | 13     | 39%      |
+| **M1 — Foundation**  | F0 + F1 + F2      | 33      | 15     | 45%      |
 | **M2 — Admin Ready** | F3 + F4           | 27      | 0      | 0%       |
 | **M3 — Parking MVP** | F5 + F6 + F7 + F8 | 54      | 0      | 0%       |
-| **MVP TOTAL**        | F0–F8             | **114** | **13** | **11%**  |
+| **MVP TOTAL**        | F0–F8             | **114** | **15** | **13%**  |
 | **M4 — Post-MVP**    | F9–F14            | 58      | 0      | 0%       |
-| **TOTAL**            | F0–F14            | **172** | **13** | **8%**   |
+| **TOTAL**            | F0–F14            | **172** | **15** | **9%**   |

@@ -44,8 +44,8 @@
 | ---- | --------------------------------------------------------------------------------------------------------------- | -------- |
 | 1.1  | Configurar wildcard domain `*.synnova.com.co` en Vercel Pro                                                     | deferred |
 | 1.2  | Crear middleware de detección de tenant (leer Host header, extraer slug)                                        | deferred |
-| 1.3  | Crear tabla `organizations` en Convex (id, slug, nombre, plan, config, módulos activos) con schema validator    | pending  |
-| 1.4  | Crear tabla `organization_modules` en Convex (organization_id, module_key, activo, config) con schema validator | pending  |
+| 1.3  | Crear tabla `organizations` en Convex (id, slug, nombre, plan, config, módulos activos) con schema validator    | done     |
+| 1.4  | Crear tabla `organization_modules` en Convex (organization_id, module_key, activo, config) con schema validator | done     |
 | 1.5  | Implementar query de resolución de tenant por slug                                                              | deferred |
 | 1.6  | Crear TenantProvider en React (expone organization_id y config al árbol)                                        | deferred |
 | 1.7  | Implementar filtro global: inyectar organization_id en toda query de Convex                                     | deferred |

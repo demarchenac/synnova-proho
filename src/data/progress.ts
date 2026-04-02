@@ -21,10 +21,10 @@ export type Milestone = {
 }
 
 export const currentFocus = {
-  phaseId: 'F0',
-  phaseName: 'Configuración del Proyecto',
-  done: 13,
-  total: 13,
+  phaseId: 'F2',
+  phaseName: 'Autenticación y Usuarios',
+  done: 0,
+  total: 10,
 }
 export const lastUpdated = '2 de abril de 2026'
 
@@ -108,12 +108,12 @@ export const milestones: Milestone[] = [
           {
             id: '1.3',
             name: 'Crear tabla organizations en Convex',
-            status: 'pending',
+            status: 'done',
           },
           {
             id: '1.4',
             name: 'Crear tabla organization_modules en Convex',
-            status: 'pending',
+            status: 'done',
           },
           {
             id: '1.5',
