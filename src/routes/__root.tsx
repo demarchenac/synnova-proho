@@ -3,6 +3,7 @@ import type { QueryClient } from '@tanstack/react-query'
 import {
   createRootRouteWithContext,
   HeadContent,
+  Link,
   Outlet,
   Scripts,
 } from '@tanstack/react-router'
@@ -41,7 +42,20 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   }),
   shellComponent: RootShell,
   component: RootLayout,
+  notFoundComponent: NotFound,
 })
+
+function NotFound() {
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center gap-4">
+      <h1 className="text-4xl font-bold">404</h1>
+      <p className="text-muted-foreground">Página no encontrada</p>
+      <Link to="/" className="text-sm underline underline-offset-4">
+        Volver al inicio
+      </Link>
+    </div>
+  )
+}
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
