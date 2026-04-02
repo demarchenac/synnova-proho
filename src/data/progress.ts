@@ -1,0 +1,918 @@
+export type TaskStatus = 'done' | 'wip' | 'pending' | 'blocked' | 'deferred'
+
+export type Task = {
+  id: string
+  name: string
+  status: TaskStatus
+}
+
+export type Phase = {
+  id: string
+  name: string
+  tasks: Task[]
+}
+
+export type Milestone = {
+  id: string
+  name: string
+  description: string
+  phases: Phase[]
+  scope: 'mvp' | 'post-mvp'
+}
+
+export const lastUpdated = '2 de abril de 2026'
+
+export const milestones: Milestone[] = [
+  {
+    id: 'M1',
+    name: 'Foundation',
+    description:
+      'App boots, auth funciona, tablas base de organización creadas',
+    scope: 'mvp',
+    phases: [
+      {
+        id: 'F0',
+        name: 'Configuración del Proyecto',
+        tasks: [
+          { id: '0.1', name: 'Inicializar repositorio Git', status: 'done' },
+          {
+            id: '0.2',
+            name: 'Scaffold TanStack Start + TypeScript',
+            status: 'done',
+          },
+          {
+            id: '0.3',
+            name: 'Configurar Tailwind CSS v4 con dark mode',
+            status: 'done',
+          },
+          {
+            id: '0.4',
+            name: 'Configurar shadcn/ui con tema base + dark mode',
+            status: 'done',
+          },
+          {
+            id: '0.5',
+            name: 'Implementar theme toggle (light/dark/system)',
+            status: 'done',
+          },
+          { id: '0.6', name: 'Configurar t3-oss/env con Zod', status: 'done' },
+          {
+            id: '0.7',
+            name: 'Crear proyecto Convex, instalar SDK, configurar provider',
+            status: 'done',
+          },
+          {
+            id: '0.8',
+            name: 'Integrar Convex con TanStack Query',
+            status: 'done',
+          },
+          {
+            id: '0.9',
+            name: 'Crear cuenta WorkOS, obtener API keys',
+            status: 'done',
+          },
+          { id: '0.10', name: 'Conectar repo a Vercel', status: 'done' },
+          {
+            id: '0.11',
+            name: 'Configurar TanStack Router (rutas base)',
+            status: 'pending',
+          },
+          {
+            id: '0.12',
+            name: 'Configurar ESLint, Prettier, TypeScript strict',
+            status: 'done',
+          },
+          { id: '0.13', name: 'Configurar CI/CD básico', status: 'pending' },
+        ],
+      },
+      {
+        id: 'F1',
+        name: 'Arquitectura Multi-Tenant',
+        tasks: [
+          {
+            id: '1.1',
+            name: 'Configurar wildcard domain en Vercel',
+            status: 'deferred',
+          },
+          {
+            id: '1.2',
+            name: 'Crear middleware de detección de tenant',
+            status: 'deferred',
+          },
+          {
+            id: '1.3',
+            name: 'Crear tabla organizations en Convex',
+            status: 'pending',
+          },
+          {
+            id: '1.4',
+            name: 'Crear tabla organization_modules en Convex',
+            status: 'pending',
+          },
+          {
+            id: '1.5',
+            name: 'Implementar query resolución de tenant por slug',
+            status: 'deferred',
+          },
+          {
+            id: '1.6',
+            name: 'Crear TenantProvider en React',
+            status: 'deferred',
+          },
+          {
+            id: '1.7',
+            name: 'Implementar filtro global de multitenancy',
+            status: 'deferred',
+          },
+          {
+            id: '1.8',
+            name: 'Crear página de tenant no encontrado',
+            status: 'deferred',
+          },
+          {
+            id: '1.9',
+            name: 'Implementar feature flags por módulo',
+            status: 'deferred',
+          },
+          {
+            id: '1.10',
+            name: 'Configurar DNS y SSL wildcard',
+            status: 'deferred',
+          },
+        ],
+      },
+      {
+        id: 'F2',
+        name: 'Autenticación y Usuarios',
+        tasks: [
+          {
+            id: '2.1',
+            name: 'Crear tabla users en Convex',
+            status: 'pending',
+          },
+          {
+            id: '2.2',
+            name: 'Implementar login con WorkOS AuthKit',
+            status: 'pending',
+          },
+          {
+            id: '2.3',
+            name: 'Implementar callback de autenticación',
+            status: 'pending',
+          },
+          {
+            id: '2.4',
+            name: 'Implementar sync WorkOS → Convex',
+            status: 'pending',
+          },
+          {
+            id: '2.5',
+            name: 'Configurar WorkOS Organizations',
+            status: 'pending',
+          },
+          { id: '2.6', name: 'Definir enum de roles', status: 'pending' },
+          {
+            id: '2.7',
+            name: 'Crear middleware de protección de rutas',
+            status: 'pending',
+          },
+          {
+            id: '2.8',
+            name: 'Implementar middleware de autorización por rol',
+            status: 'pending',
+          },
+          { id: '2.9', name: 'Implementar logout', status: 'pending' },
+          {
+            id: '2.10',
+            name: 'Implementar recuperación de contraseña',
+            status: 'pending',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'M2',
+    name: 'Admin Ready',
+    description:
+      'Super Admin onboardea tenants. Conjunto Admin configura un conjunto completo',
+    scope: 'mvp',
+    phases: [
+      {
+        id: 'F3',
+        name: 'Admin: Super Admin',
+        tasks: [
+          { id: '3.1', name: 'Layout de Super Admin', status: 'pending' },
+          {
+            id: '3.2',
+            name: 'Listado de organizaciones/tenants',
+            status: 'pending',
+          },
+          {
+            id: '3.3',
+            name: 'Onboarding de nuevo tenant',
+            status: 'pending',
+          },
+          {
+            id: '3.4',
+            name: 'Edición y desactivación de tenants',
+            status: 'pending',
+          },
+          {
+            id: '3.5',
+            name: 'Listado de usuarios (filtro por org y rol)',
+            status: 'pending',
+          },
+          {
+            id: '3.6',
+            name: 'Registro de admin de conjunto',
+            status: 'pending',
+          },
+          {
+            id: '3.7',
+            name: 'Toggle de módulos por tenant',
+            status: 'pending',
+          },
+        ],
+      },
+      {
+        id: 'F4',
+        name: 'Admin: Conjunto Admin',
+        tasks: [
+          {
+            id: '4.1',
+            name: 'Layout de Admin de conjunto',
+            status: 'pending',
+          },
+          {
+            id: '4.2',
+            name: 'Crear tabla conjuntos en Convex',
+            status: 'pending',
+          },
+          { id: '4.3', name: 'CRUD de conjuntos', status: 'pending' },
+          {
+            id: '4.4',
+            name: 'Selector de conjunto en header',
+            status: 'pending',
+          },
+          {
+            id: '4.5',
+            name: 'Crear tabla unidades en Convex',
+            status: 'pending',
+          },
+          {
+            id: '4.6',
+            name: 'CRUD de unidades/apartamentos',
+            status: 'pending',
+          },
+          {
+            id: '4.7',
+            name: 'Crear tabla residentes en Convex',
+            status: 'pending',
+          },
+          { id: '4.8', name: 'CRUD de residentes', status: 'pending' },
+          {
+            id: '4.9',
+            name: 'Crear tabla vehiculos en Convex',
+            status: 'pending',
+          },
+          { id: '4.10', name: 'CRUD de vehículos', status: 'pending' },
+          {
+            id: '4.11',
+            name: 'Crear tabla parqueaderos en Convex',
+            status: 'pending',
+          },
+          {
+            id: '4.12',
+            name: 'Configuración de parqueaderos',
+            status: 'pending',
+          },
+          {
+            id: '4.13',
+            name: 'Crear tabla regla_config en Convex',
+            status: 'pending',
+          },
+          {
+            id: '4.14',
+            name: 'Configuración de reglas del motor',
+            status: 'pending',
+          },
+          {
+            id: '4.15',
+            name: 'Gestión de estado de mora/candado',
+            status: 'pending',
+          },
+          {
+            id: '4.16',
+            name: 'Crear tabla permisos_usuario en Convex',
+            status: 'pending',
+          },
+          {
+            id: '4.17',
+            name: 'Gestión de permisos granulares',
+            status: 'pending',
+          },
+          {
+            id: '4.18',
+            name: 'Gestión de usuarios del conjunto',
+            status: 'pending',
+          },
+          {
+            id: '4.19',
+            name: 'Script de seed con datos realistas',
+            status: 'pending',
+          },
+          {
+            id: '4.20',
+            name: 'Dashboard general del admin',
+            status: 'pending',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'M3',
+    name: 'Parking MVP',
+    description:
+      'Vigilante opera en tablet (offline-first). Admin ve dashboards y auditoría. Listo para primer cliente real.',
+    scope: 'mvp',
+    phases: [
+      {
+        id: 'F5',
+        name: 'Parqueaderos: Datos Offline-First',
+        tasks: [
+          {
+            id: '5.1',
+            name: 'Crear tabla registros_acceso en Convex',
+            status: 'pending',
+          },
+          {
+            id: '5.2',
+            name: 'Crear tabla visitantes_acceso en Convex',
+            status: 'pending',
+          },
+          {
+            id: '5.3',
+            name: 'Crear tabla novedades en Convex',
+            status: 'pending',
+          },
+          {
+            id: '5.4',
+            name: 'Instalar y configurar Dexie.js',
+            status: 'pending',
+          },
+          {
+            id: '5.5',
+            name: 'Configurar PWA: manifest + service worker',
+            status: 'pending',
+          },
+          {
+            id: '5.6',
+            name: 'Mirror Convex → IndexedDB: apartamentos y vehículos',
+            status: 'pending',
+          },
+          {
+            id: '5.7',
+            name: 'Mirror Convex → IndexedDB: regla_config y permisos',
+            status: 'pending',
+          },
+          {
+            id: '5.8',
+            name: 'Mirror Convex → IndexedDB: registros y visitantes activos',
+            status: 'pending',
+          },
+          {
+            id: '5.9',
+            name: 'Arranque desde IndexedDB',
+            status: 'pending',
+          },
+          { id: '5.10', name: 'SYNC_QUEUE en IndexedDB', status: 'pending' },
+          {
+            id: '5.11',
+            name: 'Drain worker (FIFO, backoff, reintentos)',
+            status: 'pending',
+          },
+          { id: '5.12', name: 'Lógica error_permanente', status: 'pending' },
+          {
+            id: '5.13',
+            name: 'Reconciliación sync (server rechaza → notificar vigilante)',
+            status: 'pending',
+          },
+          {
+            id: '5.14',
+            name: 'Actualización optimista de cache local',
+            status: 'pending',
+          },
+          {
+            id: '5.15',
+            name: 'Indicador de conectividad',
+            status: 'pending',
+          },
+          {
+            id: '5.16',
+            name: 'Gracia de sesión 24h offline',
+            status: 'pending',
+          },
+          {
+            id: '5.17',
+            name: 'Mutation Convex: registrar ingreso',
+            status: 'pending',
+          },
+          {
+            id: '5.18',
+            name: 'Mutation Convex: registrar salida',
+            status: 'pending',
+          },
+          {
+            id: '5.19',
+            name: 'Mutation Convex: registrar visitante',
+            status: 'pending',
+          },
+          {
+            id: '5.20',
+            name: 'Mutation Convex: crear novedad',
+            status: 'pending',
+          },
+          {
+            id: '5.21',
+            name: 'Mutation Convex: registrar vehículo nuevo',
+            status: 'pending',
+          },
+          {
+            id: '5.22',
+            name: 'Tests: drain worker y sync',
+            status: 'pending',
+          },
+          {
+            id: '5.23',
+            name: 'Tests: mirror Convex → IndexedDB',
+            status: 'pending',
+          },
+        ],
+      },
+      {
+        id: 'F6',
+        name: 'Parqueaderos: Reglas y Pantallas',
+        tasks: [
+          {
+            id: '6.1',
+            name: 'Motor de reglas: Fase 1 bloqueantes (R1, R2, R3)',
+            status: 'pending',
+          },
+          {
+            id: '6.2',
+            name: 'Motor de reglas: Zona gris (ZG)',
+            status: 'pending',
+          },
+          {
+            id: '6.3',
+            name: 'Motor de reglas: Fase 2 candado (R4)',
+            status: 'pending',
+          },
+          {
+            id: '6.4',
+            name: 'Tests unitarios del motor de reglas',
+            status: 'pending',
+          },
+          { id: '6.5', name: 'Normalización de placa', status: 'pending' },
+          {
+            id: '6.6',
+            name: 'Layout tablet-first para vigilantes',
+            status: 'pending',
+          },
+          {
+            id: '6.7',
+            name: 'Pantalla principal de parqueadero',
+            status: 'pending',
+          },
+          {
+            id: '6.8',
+            name: 'Búsqueda por placa contra IndexedDB',
+            status: 'pending',
+          },
+          {
+            id: '6.9',
+            name: 'Pantalla resultado: Permitido',
+            status: 'pending',
+          },
+          {
+            id: '6.10',
+            name: 'Pantalla resultado: Rechazado',
+            status: 'pending',
+          },
+          {
+            id: '6.11',
+            name: 'Pantalla resultado: Candado activo',
+            status: 'pending',
+          },
+          {
+            id: '6.12',
+            name: 'Pantalla resultado: Zona gris',
+            status: 'pending',
+          },
+          {
+            id: '6.13',
+            name: 'Pantalla resultado: No identificado',
+            status: 'pending',
+          },
+          {
+            id: '6.14',
+            name: 'Pantalla registrar salida',
+            status: 'pending',
+          },
+          {
+            id: '6.15',
+            name: 'Campo de observaciones al ingreso',
+            status: 'pending',
+          },
+          {
+            id: '6.16',
+            name: 'Chip y botón permiso registrar_vehiculos',
+            status: 'pending',
+          },
+          {
+            id: '6.17',
+            name: 'Flujo registro vehículo nuevo',
+            status: 'pending',
+          },
+          {
+            id: '6.18',
+            name: 'Caso borde: vehículo ya está dentro',
+            status: 'pending',
+          },
+          {
+            id: '6.19',
+            name: 'Caso borde: salida sin entrada registrada',
+            status: 'pending',
+          },
+        ],
+      },
+      {
+        id: 'F7',
+        name: 'Parqueaderos: Dashboards y Auditoría',
+        tasks: [
+          {
+            id: '7.1',
+            name: 'Dashboard de disponibilidad con KPIs',
+            status: 'pending',
+          },
+          {
+            id: '7.2',
+            name: 'Tabla de vehículos dentro con filtros',
+            status: 'pending',
+          },
+          {
+            id: '7.3',
+            name: 'Vista de monitoreo en vivo',
+            status: 'pending',
+          },
+          {
+            id: '7.4',
+            name: 'Vista de histórico con filtros',
+            status: 'pending',
+          },
+          {
+            id: '7.5',
+            name: 'Vista de novedades pendientes',
+            status: 'pending',
+          },
+          { id: '7.6', name: 'Vista de auditoría', status: 'pending' },
+        ],
+      },
+      {
+        id: 'F8',
+        name: 'Parqueaderos: Alertas y Crons',
+        tasks: [
+          {
+            id: '8.1',
+            name: 'Cron: tiempo excedido residentes (60 min)',
+            status: 'pending',
+          },
+          {
+            id: '8.2',
+            name: 'Cron: tiempo excedido visitantes (60 min)',
+            status: 'pending',
+          },
+          {
+            id: '8.3',
+            name: 'Cron: visitantes después 5pm',
+            status: 'pending',
+          },
+          {
+            id: '8.4',
+            name: 'Cron: vehículos >30 días permanencia',
+            status: 'pending',
+          },
+          {
+            id: '8.5',
+            name: 'Deduplicación de novedades de tiempo',
+            status: 'pending',
+          },
+          {
+            id: '8.6',
+            name: 'Check local permanencia excedida (UI)',
+            status: 'pending',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'M4',
+    name: 'Post-MVP',
+    description:
+      'Convivencia, reservas, inspecciones, notificaciones, dashboard ejecutivo',
+    scope: 'post-mvp',
+    phases: [
+      {
+        id: 'F9',
+        name: 'Reportes de Convivencia',
+        tasks: [
+          {
+            id: '9.1',
+            name: 'Crear tabla incidentes_convivencia',
+            status: 'pending',
+          },
+          {
+            id: '9.2',
+            name: 'Formulario de nuevo incidente',
+            status: 'pending',
+          },
+          {
+            id: '9.3',
+            name: 'Carga de evidencia fotográfica',
+            status: 'pending',
+          },
+          {
+            id: '9.4',
+            name: 'Mutation: registrar incidente',
+            status: 'pending',
+          },
+          {
+            id: '9.5',
+            name: 'Listado con paginación y búsqueda',
+            status: 'pending',
+          },
+          {
+            id: '9.6',
+            name: 'Filtros por estado, tipo y fecha',
+            status: 'pending',
+          },
+          {
+            id: '9.7',
+            name: 'Vista de detalle de incidente',
+            status: 'pending',
+          },
+          { id: '9.8', name: 'Cambio de estado', status: 'pending' },
+          {
+            id: '9.9',
+            name: 'Notas/comentarios internos',
+            status: 'pending',
+          },
+          { id: '9.10', name: 'Vista Kanban', status: 'pending' },
+          {
+            id: '9.11',
+            name: 'Dashboard de incidentes (KPIs)',
+            status: 'pending',
+          },
+          {
+            id: '9.12',
+            name: 'Gráficos: por mes, por tipo, por estado',
+            status: 'pending',
+          },
+          {
+            id: '9.13',
+            name: 'Detección de patrones',
+            status: 'pending',
+          },
+        ],
+      },
+      {
+        id: 'F10',
+        name: 'Reserva de Zonas Sociales',
+        tasks: [
+          {
+            id: '10.1',
+            name: 'Crear tablas zonas_sociales y reservas',
+            status: 'pending',
+          },
+          { id: '10.2', name: 'CRUD de zonas sociales', status: 'pending' },
+          {
+            id: '10.3',
+            name: 'Formulario de solicitud de reserva',
+            status: 'pending',
+          },
+          { id: '10.4', name: 'Mutation con validación', status: 'pending' },
+          { id: '10.5', name: 'Validación de reglas', status: 'pending' },
+          { id: '10.6', name: 'Vista de calendario', status: 'pending' },
+          { id: '10.7', name: 'Flujo aprobación/rechazo', status: 'pending' },
+          { id: '10.8', name: 'Historial de reservas', status: 'pending' },
+          { id: '10.9', name: 'Config de reglas por zona', status: 'pending' },
+        ],
+      },
+      {
+        id: 'F11',
+        name: 'Apertura y Cierre',
+        tasks: [
+          {
+            id: '11.1',
+            name: 'Crear tablas inspecciones',
+            status: 'pending',
+          },
+          {
+            id: '11.2',
+            name: 'CRUD áreas de inspección',
+            status: 'pending',
+          },
+          {
+            id: '11.3',
+            name: 'Formulario de inspección diaria',
+            status: 'pending',
+          },
+          {
+            id: '11.4',
+            name: 'Carga fotográfica por área',
+            status: 'pending',
+          },
+          { id: '11.5', name: 'Estados por área', status: 'pending' },
+          {
+            id: '11.6',
+            name: 'Mutation: guardar inspección',
+            status: 'pending',
+          },
+          {
+            id: '11.7',
+            name: 'Historial de inspecciones',
+            status: 'pending',
+          },
+          {
+            id: '11.8',
+            name: 'Dashboard de tendencias',
+            status: 'pending',
+          },
+          {
+            id: '11.9',
+            name: 'Alerta novedades recurrentes',
+            status: 'pending',
+          },
+        ],
+      },
+      {
+        id: 'F12',
+        name: 'Notificaciones',
+        tasks: [
+          { id: '12.1', name: 'Crear cuenta Resend', status: 'pending' },
+          { id: '12.2', name: 'Crear cuenta UploadThing', status: 'pending' },
+          {
+            id: '12.3',
+            name: 'Servicio envío emails en Convex',
+            status: 'pending',
+          },
+          { id: '12.4', name: 'Templates React Email', status: 'pending' },
+          {
+            id: '12.5',
+            name: 'Integrar emails en flujos',
+            status: 'pending',
+          },
+          {
+            id: '12.6',
+            name: 'Configurar Meta Business WhatsApp',
+            status: 'pending',
+          },
+          {
+            id: '12.7',
+            name: 'Servicio envío WhatsApp en Convex',
+            status: 'pending',
+          },
+          { id: '12.8', name: 'Templates WhatsApp', status: 'pending' },
+          {
+            id: '12.9',
+            name: 'Integrar WhatsApp en alertas',
+            status: 'pending',
+          },
+          {
+            id: '12.10',
+            name: 'Recepción mensajes entrantes',
+            status: 'pending',
+          },
+          {
+            id: '12.11',
+            name: 'Flujo conversacional asistido',
+            status: 'pending',
+          },
+          {
+            id: '12.12',
+            name: 'Preferencias de notificación',
+            status: 'pending',
+          },
+        ],
+      },
+      {
+        id: 'F13',
+        name: 'Dashboard Ejecutivo',
+        tasks: [
+          {
+            id: '13.1',
+            name: 'Dashboard ejecutivo por conjunto',
+            status: 'pending',
+          },
+          {
+            id: '13.2',
+            name: 'Vista comparativa multi-conjunto',
+            status: 'pending',
+          },
+          { id: '13.3', name: 'Métricas de calidad', status: 'pending' },
+          { id: '13.4', name: 'Exportación CSV/Excel', status: 'pending' },
+          {
+            id: '13.5',
+            name: 'Portal público invitados',
+            status: 'pending',
+          },
+        ],
+      },
+      {
+        id: 'F14',
+        name: 'Testing Final y Deploy',
+        tasks: [
+          {
+            id: '14.1',
+            name: 'Test aislamiento multi-tenant',
+            status: 'pending',
+          },
+          {
+            id: '14.2',
+            name: 'Test operación offline completa',
+            status: 'pending',
+          },
+          {
+            id: '14.3',
+            name: 'Tests integración end-to-end',
+            status: 'pending',
+          },
+          { id: '14.4', name: 'Tests componentes UI', status: 'pending' },
+          {
+            id: '14.5',
+            name: 'Optimizar queries e índices',
+            status: 'pending',
+          },
+          { id: '14.6', name: 'Lazy loading de rutas', status: 'pending' },
+          {
+            id: '14.7',
+            name: 'Configurar dominio + wildcard',
+            status: 'pending',
+          },
+          {
+            id: '14.8',
+            name: 'Monitoreo y alertas producción',
+            status: 'pending',
+          },
+          {
+            id: '14.9',
+            name: 'Pruebas de carga multi-tenant',
+            status: 'pending',
+          },
+          { id: '14.10', name: 'Deploy a producción', status: 'pending' },
+        ],
+      },
+    ],
+  },
+]
+
+// Computed helpers
+export function getPhaseStats(phase: Phase) {
+  const total = phase.tasks.length
+  const done = phase.tasks.filter((t) => t.status === 'done').length
+  const active = phase.tasks.filter((t) => t.status !== 'deferred').length
+  const deferred = total - active
+  const percent = active > 0 ? Math.round((done / active) * 100) : 0
+  return { total, done, active, deferred, percent }
+}
+
+export function getMilestoneStats(milestone: Milestone) {
+  const tasks = milestone.phases.flatMap((p) => p.tasks)
+  const total = tasks.length
+  const done = tasks.filter((t) => t.status === 'done').length
+  const active = tasks.filter((t) => t.status !== 'deferred').length
+  const percent = active > 0 ? Math.round((done / active) * 100) : 0
+  return { total, done, active, percent }
+}
+
+export function getTotalStats() {
+  const allTasks = milestones.flatMap((m) => m.phases.flatMap((p) => p.tasks))
+  const total = allTasks.length
+  const done = allTasks.filter((t) => t.status === 'done').length
+  const mvpTasks = milestones
+    .filter((m) => m.scope === 'mvp')
+    .flatMap((m) => m.phases.flatMap((p) => p.tasks))
+  const mvpTotal = mvpTasks.length
+  const mvpDone = mvpTasks.filter((t) => t.status === 'done').length
+  return {
+    total,
+    done,
+    percent: Math.round((done / total) * 100),
+    mvpTotal,
+    mvpDone,
+    mvpPercent: mvpTotal > 0 ? Math.round((mvpDone / mvpTotal) * 100) : 0,
+  }
+}
