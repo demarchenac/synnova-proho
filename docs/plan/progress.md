@@ -13,12 +13,13 @@
 - `wip` = En progreso
 - `pending` = Pendiente
 - `blocked` = Bloqueada
+- `deferred` = Diferida a pre-prod deploy
 
 ---
 
 ## M1 — Foundation
 
-### Fase 0 — Configuración del Proyecto (10/13)
+### Fase 0 — Configuración del Proyecto (11/13)
 
 | ID   | Tarea                                                    | Estado  |
 | ---- | -------------------------------------------------------- | ------- |
@@ -31,25 +32,25 @@
 | 0.7  | Crear proyecto Convex, instalar SDK, configurar provider | done    |
 | 0.8  | Integrar Convex con TanStack Query                       | done    |
 | 0.9  | Crear cuenta WorkOS, obtener API keys                    | done    |
-| 0.10 | Conectar repo a Vercel                                   | pending |
+| 0.10 | Conectar repo a Vercel                                   | done    |
 | 0.11 | Configurar TanStack Router (rutas base)                  | pending |
 | 0.12 | Configurar ESLint, Prettier, TypeScript strict           | done    |
 | 0.13 | Configurar CI/CD básico                                  | pending |
 
-### Fase 1 — Arquitectura Multi-Tenant (0/10)
+### Fase 1 — Arquitectura Multi-Tenant (0/2 active, 8 deferred to pre-prod)
 
-| ID   | Tarea                                           | Estado  |
-| ---- | ----------------------------------------------- | ------- |
-| 1.1  | Configurar wildcard domain en Vercel            | pending |
-| 1.2  | Crear middleware de detección de tenant         | pending |
-| 1.3  | Crear tabla organizations en Convex             | pending |
-| 1.4  | Crear tabla organization_modules en Convex      | pending |
-| 1.5  | Implementar query resolución de tenant por slug | pending |
-| 1.6  | Crear TenantProvider en React                   | pending |
-| 1.7  | Implementar filtro global de multitenancy       | pending |
-| 1.8  | Crear página de tenant no encontrado            | pending |
-| 1.9  | Implementar feature flags por módulo            | pending |
-| 1.10 | Configurar DNS y SSL wildcard                   | pending |
+| ID   | Tarea                                           | Estado   |
+| ---- | ----------------------------------------------- | -------- |
+| 1.1  | Configurar wildcard domain en Vercel            | deferred |
+| 1.2  | Crear middleware de detección de tenant         | deferred |
+| 1.3  | Crear tabla organizations en Convex             | pending  |
+| 1.4  | Crear tabla organization_modules en Convex      | pending  |
+| 1.5  | Implementar query resolución de tenant por slug | deferred |
+| 1.6  | Crear TenantProvider en React                   | deferred |
+| 1.7  | Implementar filtro global de multitenancy       | deferred |
+| 1.8  | Crear página de tenant no encontrado            | deferred |
+| 1.9  | Implementar feature flags por módulo            | deferred |
+| 1.10 | Configurar DNS y SSL wildcard                   | deferred |
 
 ### Fase 2 — Autenticación y Usuarios (0/10)
 

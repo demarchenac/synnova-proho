@@ -9,7 +9,7 @@
 
 | Milestone            | Fases          | Qué se puede hacer al completarlo                                                                                                      |
 | -------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| **M1 — Foundation**  | F0, F1, F2     | App boots, auth funciona, multi-tenant resuelve subdominios                                                                            |
+| **M1 — Foundation**  | F0, F1\*, F2   | App boots, auth funciona, tablas base de org creadas. (\*F1 parcial: solo tablas, infra multi-tenant diferida a pre-prod)              |
 | **M2 — Admin Ready** | F3, F4         | Super Admin onboardea tenants. Conjunto Admin configura un conjunto completo (torres, aptos, vehículos, residentes, reglas, permisos)  |
 | **M3 — Parking MVP** | F5, F6, F7, F8 | Vigilante opera en tablet (offline-first). Admin ve dashboards y auditoría. Crons generan alertas. **Listo para primer cliente real.** |
 | **M4 — Post-MVP**    | F9+            | Convivencia, reservas, inspecciones, notificaciones, dashboard ejecutivo                                                               |
@@ -18,38 +18,40 @@
 
 ## Fase 0 — Configuración del Proyecto
 
-| ID   | Tarea                                                                                                                                                   | Estado |
-| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| 0.1  | Inicializar repositorio Git con .gitignore y estructura de carpetas                                                                                     | done   |
-| 0.2  | Scaffold del proyecto con TanStack Start + TypeScript                                                                                                   | done   |
-| 0.3  | Configurar Tailwind CSS v4 con dark mode (class strategy, `prefers-color-scheme` default)                                                               | done   |
-| 0.4  | Configurar shadcn/ui con tema base: colores (incluyendo semánticos para motor: verde, rojo, ámbar, morado), tipografía, border-radius, dark mode tokens | done   |
-| 0.5  | Implementar theme toggle (light/dark/system) persistido en localStorage                                                                                 | done   |
-| 0.6  | Configurar t3-oss/env con esquema Zod de variables de entorno                                                                                           | done   |
-| 0.7  | Crear proyecto en Convex, instalar SDK, configurar provider                                                                                             | done   |
-| 0.8  | Integrar Convex con TanStack Query (@convex-dev/react-query)                                                                                            | done   |
-| 0.9  | Crear cuenta WorkOS, obtener API keys, instalar AuthKit SDK                                                                                             | done   |
-| 0.10 | Conectar repositorio a Vercel, configurar variables de entorno                                                                                          | pending |
+| ID   | Tarea                                                                                                                                                   | Estado  |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| 0.1  | Inicializar repositorio Git con .gitignore y estructura de carpetas                                                                                     | done    |
+| 0.2  | Scaffold del proyecto con TanStack Start + TypeScript                                                                                                   | done    |
+| 0.3  | Configurar Tailwind CSS v4 con dark mode (class strategy, `prefers-color-scheme` default)                                                               | done    |
+| 0.4  | Configurar shadcn/ui con tema base: colores (incluyendo semánticos para motor: verde, rojo, ámbar, morado), tipografía, border-radius, dark mode tokens | done    |
+| 0.5  | Implementar theme toggle (light/dark/system) persistido en localStorage                                                                                 | done    |
+| 0.6  | Configurar t3-oss/env con esquema Zod de variables de entorno                                                                                           | done    |
+| 0.7  | Crear proyecto en Convex, instalar SDK, configurar provider                                                                                             | done    |
+| 0.8  | Integrar Convex con TanStack Query (@convex-dev/react-query)                                                                                            | done    |
+| 0.9  | Crear cuenta WorkOS, obtener API keys, instalar AuthKit SDK                                                                                             | done    |
+| 0.10 | Conectar repositorio a Vercel, configurar variables de entorno                                                                                          | done    |
 | 0.11 | Configurar TanStack Router con estructura base de rutas (public, auth, super-admin, admin, vigilante)                                                   | pending |
-| 0.12 | Configurar ESLint, Prettier, TypeScript strict                                                                                                          | done   |
+| 0.12 | Configurar ESLint, Prettier, TypeScript strict                                                                                                          | done    |
 | 0.13 | Configurar CI/CD básico (GitHub Actions o Vercel auto-deploy)                                                                                           | pending |
 
 ---
 
 ## Fase 1 — Arquitectura Multi-Tenant
 
-| ID   | Tarea                                                                                                           |
-| ---- | --------------------------------------------------------------------------------------------------------------- |
-| 1.1  | Configurar wildcard domain `*.synnova.com.co` en Vercel Pro                                                     |
-| 1.2  | Crear middleware de detección de tenant (leer Host header, extraer slug)                                        |
-| 1.3  | Crear tabla `organizations` en Convex (id, slug, nombre, plan, config, módulos activos) con schema validator    |
-| 1.4  | Crear tabla `organization_modules` en Convex (organization_id, module_key, activo, config) con schema validator |
-| 1.5  | Implementar query de resolución de tenant por slug                                                              |
-| 1.6  | Crear TenantProvider en React (expone organization_id y config al árbol)                                        |
-| 1.7  | Implementar filtro global: inyectar organization_id en toda query de Convex                                     |
-| 1.8  | Crear página de tenant no encontrado (subdominio no registrado)                                                 |
-| 1.9  | Implementar lógica de feature flags por módulo según config del tenant                                          |
-| 1.10 | Configurar DNS y certificado SSL wildcard                                                                       |
+> Las tablas base (1.3, 1.4) son necesarias ya que el modelo de datos referencia `organization_id`. La infraestructura de subdominios y middleware se difiere a pre-prod deploy.
+
+| ID   | Tarea                                                                                                           | Estado   |
+| ---- | --------------------------------------------------------------------------------------------------------------- | -------- |
+| 1.1  | Configurar wildcard domain `*.synnova.com.co` en Vercel Pro                                                     | deferred |
+| 1.2  | Crear middleware de detección de tenant (leer Host header, extraer slug)                                        | deferred |
+| 1.3  | Crear tabla `organizations` en Convex (id, slug, nombre, plan, config, módulos activos) con schema validator    | pending  |
+| 1.4  | Crear tabla `organization_modules` en Convex (organization_id, module_key, activo, config) con schema validator | pending  |
+| 1.5  | Implementar query de resolución de tenant por slug                                                              | deferred |
+| 1.6  | Crear TenantProvider en React (expone organization_id y config al árbol)                                        | deferred |
+| 1.7  | Implementar filtro global: inyectar organization_id en toda query de Convex                                     | deferred |
+| 1.8  | Crear página de tenant no encontrado (subdominio no registrado)                                                 | deferred |
+| 1.9  | Implementar lógica de feature flags por módulo según config del tenant                                          | deferred |
+| 1.10 | Configurar DNS y certificado SSL wildcard                                                                       | deferred |
 
 ---
 
